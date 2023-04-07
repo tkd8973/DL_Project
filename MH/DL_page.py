@@ -93,8 +93,8 @@ with st.sidebar:
 if choice == "페이지1":
     
     tab0, tab1, tab2, tab3 = st.tabs(["🏠 Main", "tab1", "tab2", "tab3"])
-    # image_molu = "MH/image/molu.gif"
-    # image_molu_ai = "MH/image/molu_ai.jpg"
+    image_molu = "MH/image/molu.gif"
+    image_molu_ai = "MH/image/molu_ai.jpg"
 
     # Streamlit에서 GIF 보여주기
 

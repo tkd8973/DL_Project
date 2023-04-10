@@ -271,6 +271,53 @@ if choice == "페이지1":
         '''
         ### 탭3
         '''
+        @st.cache(allow_output_mutation=True, suppress_st_warning=True)
+        def get_model():
+            # 모델 파일 ID와 Google Drive API 정보
+            file_id = '1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco'
+            api_version = 'v3'
+            credentials = Credentials.from_authorized_user_info(info=None)
+
+            # Google Drive API를 사용해서 모델 파일 로드
+            service = build('drive', api_version, credentials=credentials)
+            request = service.files().get_media(fileId=file_id)
+            file = io.BytesIO(request.execute())
+
+            # 모델 파일 로드
+            model = torch.load(file, map_location=torch.device('cpu'))
+
+            return model
+
+
+        model = get_model()
+
+        # 스트림릿 앱 구현
+        st.title("딥러닝 모델 구현")
+
+        # 이미지 업로드
+        uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
+
+        if uploaded_file is not None:
+            image = Image.open(uploaded_file)
+            st.image(image, caption='업로드한 이미지', use_column_width=True)
+
+            # 이미지 전처리
+            transform = transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225]
+                )
+            ])
+            input_tensor = transform(image).unsqueeze(0)
+
+            # 모델 예측
+            with torch.no_grad():
+                model.eval()
+                output = model(input_tensor)
+                prediction = torch.argmax(output, dim=1).item()
+            st.write("예측 결과:", prediction)
 elif choice == "페이지2":
     st.subheader("페이지2")
     # CSS 스타일을 사용하여 배경 이미지를 설정합니다.

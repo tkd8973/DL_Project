@@ -135,16 +135,16 @@ if choice == "페이지1":
         '''
         
 
-        def download_file_from_google_drive(1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco, destination):
-            URL = f"https://drive.google.com/u/0/uc?id={1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco}&export=download"
+        def download_file_from_google_drive(id, destination):
+            URL = f"https://drive.google.com/u/0/uc?id={id}&export=download"
 
             session = requests.Session()
 
-            response = session.get(URL, params={'id': 1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco}, stream=True)
+            response = session.get(URL, params={'id': id}, stream=True)
             token = get_confirm_token(response)
 
             if token:
-                params = {'id': 1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco, 'confirm': token}
+                params = {'id': id, 'confirm': token}
                 response = session.get(URL, params=params, stream=True)
 
             save_response_content(response, destination)
@@ -162,7 +162,7 @@ if choice == "페이지1":
                 for chunk in response.iter_content(CHUNK_SIZE):
                     if chunk:
                         f.write(chunk)
-        file_id = 'your_file_id'
+        file_id = '1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco'
         destination = 'model.pth'
         download_file_from_google_drive(file_id, destination)
         st.title("딥러닝 모델 구현")

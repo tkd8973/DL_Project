@@ -12,3 +12,4 @@ openpyxl
 streamlit
 tabulate
 torch
+torchvision

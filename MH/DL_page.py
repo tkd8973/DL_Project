@@ -13,6 +13,8 @@ import seaborn as sns
 from streamlit_option_menu import option_menu
 import base64
 import torch
+import torchvision
+
 
 st.set_page_config(page_title="Deep Learning Project", page_icon=":minidisc:", layout="wide")
 

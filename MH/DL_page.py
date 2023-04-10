@@ -135,16 +135,16 @@ if choice == "페이지1":
         '''
         
 
-        def download_file_from_google_drive(id, destination):
+        def download_file_from_google_drive(1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco, destination):
             URL = f"https://drive.google.com/u/0/uc?id={1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco}&export=download"
 
             session = requests.Session()
 
-            response = session.get(URL, params={'id': id}, stream=True)
+            response = session.get(URL, params={'id': 1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco}, stream=True)
             token = get_confirm_token(response)
 
             if token:
-                params = {'id': id, 'confirm': token}
+                params = {'id': 1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco, 'confirm': token}
                 response = session.get(URL, params=params, stream=True)
 
             save_response_content(response, destination)

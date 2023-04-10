@@ -173,21 +173,21 @@ if choice == "페이지1":
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
             st.image(image, caption='업로드한 이미지', use_column_width=True)
-            
+
             # 이미지 전처리
-            
-            transform = torch.nn.Sequential(
-            torch.nn.Resize((224, 224)),
-            torch.nn.ToTensor(),
-            torch.nn.Normalize(
-                mean=[0.485, 0.456, 0.406],
-                std=[0.229, 0.224, 0.225]
+            transform = torchvision.transforms.Compose([
+                torchvision.transforms.Resize((224, 224)),
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225]
                 )
-            )
+            ])
             input_tensor = transform(image).unsqueeze(0)
 
             # 모델 예측
             output = model(input_tensor)
+
                 
         # 모델 로드
             # model = torch.load(destination, map_location=torch.device('cpu'))

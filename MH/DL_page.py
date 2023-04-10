@@ -170,7 +170,7 @@ if choice == "페이지1":
 
 
         # 모델 다운로드 및 불러오기
-        file_id = '1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco'
+        file_id = '1-vjy2FdJPmQ_HjLBm_hhLsaEeO-Lqw0G'
         destination = 'model.pth'
         download_file_from_google_drive(file_id, destination)
         model = torch.load(destination)

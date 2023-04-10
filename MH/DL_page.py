@@ -141,9 +141,10 @@ if choice == "페이지1":
         from PIL import Image
 
         st.title("딥러닝 모델 구현")
-
+        device = torch.device("cpu")  # CPU에서 실행할 경우
+        model = torch.load("MH/model/vgg_weights.pth", map_location=device)
         # 모델 불러오기
-        model = torch.load("MH/model/vgg_weights.pth")
+        # model = torch.load("MH/model/vgg_weights.pth")
 
         # model = torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu"))
 

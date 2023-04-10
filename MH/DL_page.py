@@ -188,7 +188,7 @@ if choice == "페이지1":
             input_tensor = transform(image).unsqueeze(0)
 
             # 모델 예측
-            output = model(input_tensor)
+            # output = model(input_tensor)
 
                 
         # 모델 로드

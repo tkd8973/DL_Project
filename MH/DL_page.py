@@ -133,6 +133,59 @@ if choice == "페이지1":
         '''
         ### 자료 설명
         '''
+        
+
+        def download_file_from_google_drive(id, destination):
+            URL = f"https://drive.google.com/u/0/uc?id={1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco}&export=download"
+
+            session = requests.Session()
+
+            response = session.get(URL, params={'id': id}, stream=True)
+            token = get_confirm_token(response)
+
+            if token:
+                params = {'id': id, 'confirm': token}
+                response = session.get(URL, params=params, stream=True)
+
+            save_response_content(response, destination)
+            
+        def get_confirm_token(response):
+            for key, value in response.cookies.items():
+                if key.startswith('download_warning'):
+                    return value
+            return None
+
+        def save_response_content(response, destination):
+            CHUNK_SIZE = 32768
+
+            with open(destination, "wb") as f:
+                for chunk in response.iter_content(CHUNK_SIZE):
+                    if chunk:
+                        f.write(chunk)
+        file_id = 'your_file_id'
+        destination = 'model.pth'
+        download_file_from_google_drive(file_id, destination)
+        st.title("딥러닝 모델 구현")
+
+        # 모델 불러오기
+        file_id = 'your_file_id'
+        destination = 'model.pth'
+        download_file_from_google_drive(file_id, destination)
+        model = torch.load(destination, map_location=torch.device("cpu"))
+
+        # 이미지 업로드
+        uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
+
+        if uploaded_file is not None:
+            image = Image.open(uploaded_file)
+            st.image(image, caption='업로드한 이미지', use_column_width=True)
+            
+            # 이미지 전처리
+            transform = torch.nn.Sequential(
+                torch.nn.Resize((224, 224)),
+                torch
+        # 모델 로드
+        model = torch.load(destination, map_location=torch.device('cpu'))
     with tab2:
         tab2.subheader("탭2")
         st.write()

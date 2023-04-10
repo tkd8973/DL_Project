@@ -137,60 +137,69 @@ if choice == "페이지1":
         '''
         ### 자료 설명
         '''
-        
 
-        # def download_file_from_google_drive(id, destination):
-        #     URL = f"https://drive.google.com/u/0/uc?id={id}&export=download"
 
-        #     session = requests.Session()
 
-        #     response = session.get(URL, params={'id': id}, stream=True)
-        #     token = get_confirm_token(response)
+        def download_file_from_google_drive(id, destination):
+            URL = f"https://drive.google.com/u/0/uc?id={id}&export=download"
 
-        #     if token:
-        #         params = {'id': id, 'confirm': token}
-        #         response = session.get(URL, params=params, stream=True)
+            session = requests.Session()
 
-        #     save_response_content(response, destination)
-            
-        # def get_confirm_token(response):
-        #     for key, value in response.cookies.items():
-        #         if key.startswith('download_warning'):
-        #             return value
-        #     return None
+            response = session.get(URL, params={'id': id}, stream=True)
+            token = get_confirm_token(response)
 
-        # def save_response_content(response, destination):
-        #     CHUNK_SIZE = 32768
+            if token:
+                params = {'id': id, 'confirm': token}
+                response = session.get(URL, params=params, stream=True)
 
-        #     with open(destination, "wb") as f:
-        #         for chunk in response.iter_content(CHUNK_SIZE):
-        #             if chunk:
-        #                 f.write(chunk)
-        # file_id = '1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco'
-        # destination = 'model.pth'
-        # download_file_from_google_drive(file_id, destination)
-        # st.title("딥러닝 모델 구현")
+            save_response_content(response, destination)
 
-        # # 이미지 업로드
-        # uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
 
-        # if uploaded_file is not None:
-        #     image = Image.open(uploaded_file)
-        #     st.image(image, caption='업로드한 이미지', use_column_width=True)
+        def get_confirm_token(response):
+            for key, value in response.cookies.items():
+                if key.startswith('download_warning'):
+                    return value
+            return None
 
-        #     # 이미지 전처리
-        #     transform = torchvision.transforms.Compose([
-        #         torchvision.transforms.Resize((224, 224)),
-        #         torchvision.transforms.ToTensor(),
-        #         torchvision.transforms.Normalize(
-        #             mean=[0.485, 0.456, 0.406],
-        #             std=[0.229, 0.224, 0.225]
-        #         )
-        #     ])
-        #     input_tensor = transform(image).unsqueeze(0)
+
+        def save_response_content(response, destination):
+            CHUNK_SIZE = 32768
+
+            with open(destination, "wb") as f:
+                for chunk in response.iter_content(CHUNK_SIZE):
+                    if chunk:
+                        f.write(chunk)
+
+
+        # 모델 다운로드 및 불러오기
+        file_id = '1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco'
+        destination = 'model.pth'
+        download_file_from_google_drive(file_id, destination)
+        model = torch.load(destination)
+
+        st.title("딥러닝 모델 구현")
+
+        # 이미지 업로드
+        uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
+
+        if uploaded_file is not None:
+            image = Image.open(uploaded_file)
+            st.image(image, caption='업로드한 이미지', use_column_width=True)
+
+            # 이미지 전처리
+            transform = torchvision.transforms.Compose([
+                torchvision.transforms.Resize((224, 224)),
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406],
+                    std=[0.229, 0.224, 0.225]
+                )
+            ])
+            input_tensor = transform(image).unsqueeze(0)
 
             # 모델 예측
-            # output = model(input_tensor)
+            output = model(input_tensor)
+
 
                 
         # 모델 로드

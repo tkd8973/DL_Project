@@ -137,12 +137,13 @@ if choice == "페이지1":
         '''
         import streamlit as st
         import torch
+        import torchvision.transforms as transforms
         from PIL import Image
 
         st.title("딥러닝 모델 구현")
 
         # 모델 불러오기
-        model = torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu"))
+        model = torch.load("my_model.pth", map_location=torch.device("cpu"))
 
         # 이미지 업로드
         uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
@@ -152,11 +153,11 @@ if choice == "페이지1":
             st.image(image, caption='업로드한 이미지', use_column_width=True)
             
             # 이미지 전처리
-            transform = torch.nn.Sequential(
-                torch.nn.Resize((224, 224)),
-                torch.nn.ToTensor(),
-                torch.nn.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-            )
+            transform = transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+            ])
             image = transform(image).unsqueeze(0)
 
             # 모델 예측

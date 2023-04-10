@@ -149,7 +149,7 @@ if choice == "페이지1":
                 ...
 
         model = MyModel()
-        model.load_state_dict(torch.load("model.pth", map_location=torch.device("cpu")))
+        model.load_state_dict(torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu")))
 
         # 이미지 업로드
         uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])

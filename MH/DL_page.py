@@ -236,6 +236,7 @@ if choice == "페이지1":
 
         # 모델 불러오기
         model = torch.load(destination)
+        model.load_state_dict(torch.load('vgg_weights.pth'))
 
         # 스트림릿 앱 구현
         st.title("딥러닝 모델 구현")

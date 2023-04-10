@@ -141,15 +141,12 @@ if choice == "페이지1":
         from PIL import Image
 
         st.title("딥러닝 모델 구현")
+        device = torch.device("cpu")  # CPU에서 실행할 경우
+        model = torch.load("model/vgg_weights.pth", map_location=device)
 
-        class MyModel(torch.nn.Module):
-            def __init__(self):
-                super().__init__()
-                # 모델 구성
-                ...
-
-        model = MyModel()
-        model.load_state_dict(torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu")))
+        # 모델 구조 출력
+        st.write("### 모델 구조")
+        st.write(model)
 
         # 이미지 업로드
         uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
@@ -173,8 +170,10 @@ if choice == "페이지1":
 
             # 예측 결과 출력
             labels = ['class1', 'class2', 'class3'] # 분류 클래스 라벨
+            st.write("### 예측 결과")
             for i in range(len(labels)):
                 st.write(f"{labels[i]}: {probabilities[i]*100:.2f}%")
+
 
 
 

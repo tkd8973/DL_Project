@@ -146,7 +146,7 @@ if choice == "페이지1":
 
         # 모델 구조 출력
         st.write("### 모델 구조")
-        st.write(model)
+        # st.write(model)
 
         # 이미지 업로드
         uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])

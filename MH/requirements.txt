@@ -13,3 +13,4 @@ streamlit
 tabulate
 torch
 torchvision
+Pillow

@@ -177,7 +177,7 @@ if choice == "페이지1":
             # 이미지 전처리
             transform = torch.nn.Sequential(
                 torch.nn.Resize((224, 224)),
-                torch
+                torch)
         # 모델 로드
             # model = torch.load(destination, map_location=torch.device('cpu'))
     with tab2:

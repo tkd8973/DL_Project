@@ -167,12 +167,6 @@ if choice == "페이지1":
         download_file_from_google_drive(file_id, destination)
         st.title("딥러닝 모델 구현")
 
-        # 모델 불러오기
-        file_id = 'your_file_id'
-        destination = 'model.pth'
-        download_file_from_google_drive(file_id, destination)
-        model = torch.load(destination, map_location=torch.device("cpu"))
-
         # 이미지 업로드
         uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
 
@@ -185,7 +179,7 @@ if choice == "페이지1":
                 torch.nn.Resize((224, 224)),
                 torch
         # 모델 로드
-            model = torch.load(destination, map_location=torch.device('cpu'))
+        model = torch.load(destination, map_location=torch.device('cpu'))
     with tab2:
         tab2.subheader("탭2")
         st.write()

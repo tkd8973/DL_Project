@@ -185,7 +185,7 @@ if choice == "페이지1":
                 torch.nn.Resize((224, 224)),
                 torch
         # 모델 로드
-        model = torch.load(destination, map_location=torch.device('cpu'))
+            model = torch.load(destination, map_location=torch.device('cpu'))
     with tab2:
         tab2.subheader("탭2")
         st.write()

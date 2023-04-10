@@ -176,9 +176,6 @@ if choice == "페이지1":
 
 
 
-
-
-
                 
         # 모델 로드
             # model = torch.load(destination, map_location=torch.device('cpu'))

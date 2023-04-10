@@ -11,4 +11,4 @@ numpy
 openpyxl
 streamlit
 tabulate
-
+torch

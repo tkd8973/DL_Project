@@ -231,7 +231,7 @@ if choice == "페이지1":
 
         # 모델 다운로드
         file_id = '1lnhHrE5dIEdKwjsgtXZi8bPJz07GYAco'
-        destination = 'model.pth'
+        destination = 'vgg_weights.pth'
         download_file_from_google_drive(file_id, destination)
 
         # 모델 불러오기

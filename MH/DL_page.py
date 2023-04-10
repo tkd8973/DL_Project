@@ -143,7 +143,8 @@ if choice == "페이지1":
         st.title("딥러닝 모델 구현")
 
         # 모델 불러오기
-        model = torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu"))
+        model = MyModel()
+        model.load_state_dict(torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu")))
 
         # 이미지 업로드
         uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])

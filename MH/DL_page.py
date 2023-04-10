@@ -182,12 +182,12 @@ if choice == "페이지1":
             torch.nn.Normalize(
                 mean=[0.485, 0.456, 0.406],
                 std=[0.229, 0.224, 0.225]
-    )
-)
-input_tensor = transform(image).unsqueeze(0)
+                )
+            )
+            input_tensor = transform(image).unsqueeze(0)
 
-# 모델 예측
-output = model(input_tensor)
+            # 모델 예측
+            output = model(input_tensor)
                 
         # 모델 로드
             # model = torch.load(destination, map_location=torch.device('cpu'))

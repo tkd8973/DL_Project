@@ -235,8 +235,7 @@ if choice == "페이지1":
         download_file_from_google_drive(file_id, destination)
 
         # 모델 불러오기
-        # model = torch.load(destination)
-        model.load_state_dict(torch.load(destination))
+        model = torch.load(destination)
 
         # 스트림릿 앱 구현
         st.title("딥러닝 모델 구현")

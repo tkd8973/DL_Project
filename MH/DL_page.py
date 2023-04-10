@@ -142,7 +142,7 @@ from PIL import Image
 st.title("딥러닝 모델 구현")
 
 # 모델 불러오기
-model = torch.load("MH/deep/vgg_weights.pth", map_location=torch.device("cpu"))
+model = torch.load("MH/model/vgg_weights.pth", map_location=torch.device("cpu"))
 
 # 이미지 업로드
 uploaded_file = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])

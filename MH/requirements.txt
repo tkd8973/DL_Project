@@ -11,6 +11,6 @@ numpy
 openpyxl
 streamlit
 tabulate
-torch
+torch==2.0.0+cu118
 torchvision
 Pillow

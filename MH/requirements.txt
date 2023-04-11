@@ -13,4 +13,4 @@ streamlit
 tabulate
 torch==2.0.0
 torchvision
-Pillow
+pillow
